@@ -1,0 +1,11 @@
+{% if test_cases_list %}
+    <ul>
+        {% for test_case in test_cases_list %}
+        <li>
+            <a href="/testcases/{{ test_case.id }}/">[{{ test_case.id }}] {{ test_case.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No test cases are available.</p>
+{% endif %}

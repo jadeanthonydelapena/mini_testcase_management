@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.template import loader
 from .models import TestCase
 
 
 def index(request):
-    recent_test_cases = TestCase.objects.order_by("-date_created")
-    output = f" - ".join([t.title for t in recent_test_cases])
-    return HttpResponse(output)
+    test_cases_all = TestCase.objects.all()
+    template = loader.get_template('testcases/index.html')
+    context = {'test_cases_list': test_cases_all}
+    return HttpResponse(template.render(context, request))
 
 def display_test_case_detail(request, test_case_id):
     return HttpResponse(f"You are looking at the details of Test Case {test_case_id}.")
