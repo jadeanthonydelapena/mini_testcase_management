@@ -2,7 +2,7 @@
     <ul>
         {% for test_case in test_cases_list %}
         <li>
-            <a href="/testcases/{{ test_case.id }}/">{{ test_case.title }}</a>
+            <a href="/testcases/{{ test_case.id }}/">[{{ test_case.id }}] {{ test_case.title }}</a>
         </li>
         {% endfor %}
     </ul>
