@@ -11,12 +11,9 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def display_test_case_detail(request, test_case_id):
-    return HttpResponse(f"You are looking at the details of Test Case {test_case_id}.")
+    test_case = TestCase.objects.get(pk=test_case_id)
+    test_case_steps = test_case.teststep_set.all()
 
-def display_test_case_steps(request, test_case_id):
-    # return HttpResponse(f"You are looking at the test steps of Test Case {test_case_id}.")
-    target_test_case = TestCase.objects.get(pk=test_case_id)
-    target_test_steps = target_test_case.teststep_set.all()
-    output = " ".join([f"{step.action}: {step.expected_result}" for step in target_test_steps])
-
-    return HttpResponse(output)
+    template = loader.get_template('testcases/test_case_detail.html')
+    context = {'test_case' : test_case, 'test_case_steps' : test_case_steps}
+    return HttpResponse(template.render(context, request))
