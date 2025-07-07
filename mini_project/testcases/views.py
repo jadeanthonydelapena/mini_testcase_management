@@ -15,5 +15,10 @@ def display_test_case_detail(request, test_case_id):
     test_case_steps = test_case.teststep_set.all()
 
     template = loader.get_template('testcases/test_case_detail.html')
-    context = {'test_case' : test_case, 'test_case_steps' : test_case_steps}
+    context = {'test_case_id': f"{test_case.id:03d}", 'test_case' : test_case, 'test_case_steps' : test_case_steps}
+    return HttpResponse(template.render(context, request))
+
+def add_test_case(request):
+    template = loader.get_template('testcases/add_test_case.html')
+    context = {}
     return HttpResponse(template.render(context, request))
