@@ -1,5 +1,57 @@
-<form action="/testcases/add-test-case/" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="Submit" value="Add">
-</form>
+<html>
+    <head>
+        <title>Add Test Steps</title>
+        <style>
+            .test-step-data {
+                margin-bottom: 10px;
+            }
+            #test-case-title {
+                display: flex;
+                align-items: center;
+            }
+            #test-case-title label,
+            #test-case-title input,
+            #test-case-title, #button-add-step {
+                margin-right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>New Test Case</h1>
+        <form id="test-steps" method="post">
+            {% csrf_token %}
+            <label for="tc-title">Title: </label>
+            <input type="text" id="tc-title" name="tc-title">
+            <button type="button" id="button-add-step" onclick="add_fields()">Add Test Step</button>
+            <div class="test-step-data"></div>
+            <input type="Submit" value="Save">
+        </form>
+    <script>
+        let step_counter = 0;
+        function add_fields(){
+            step_counter++;
+
+            console.log(step_counter);
+
+            // new div element
+            const new_fields_group = document.createElement('div');
+            new_fields_group.className = 'test-step-data';
+            
+            // Action
+            var input_action = document.createElement('input');
+            input_action.type = 'text';
+            input_action.name = `step_action_${step_counter}`;
+
+            // Result
+            var input_result = document.createElement('input');
+            input_result.type = 'text';
+            input_result.name = `step_result_${step_counter}`;
+
+            new_fields_group.appendChild(input_action);
+            new_fields_group.appendChild(input_result);
+
+            document.getElementById('test-steps').appendChild(new_fields_group);
+        }
+    </script>
+    </body>
+</html>
