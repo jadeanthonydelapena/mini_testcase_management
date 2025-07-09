@@ -1,4 +1,4 @@
-<h2>[{{ test_case.id }}] {{ test_case.title }}</h2>
+<h2>{{ test_case_id }} {{ test_case.title }}</h2>
 <p>Author: {{ test_case.owner }}</p>
 <p>Date Created: {{ test_case.date_created }}</p>
 {% if test_case_steps %}
@@ -6,13 +6,11 @@
         <tr>
             <th>Action</th>
             <th>Expected Result</th>
-            <th>Result</th>
         </tr>
         {% for test_step in test_case_steps %}
             <tr>
                 <td>{{ test_step.action }}</td>
                 <td>{{ test_step.expected_result }}</td>
-                <td>{{ test_step.result }}</td>
             </tr>
         {% endfor %}
     </table>
